@@ -9,6 +9,7 @@ import AdminIndex from '@/view/admin/AdminIndex'
 import Article from '@/view/admin/Article'
 import ArticleEdit from '@/view/admin/ArticleEdit'
 import Classify from '@/view/admin/Classify'
+import ClassifyEdit from '@/view/admin/ClassifyEdit'
 import Tag from '@/view/admin/Tag'
 import Login from '@/view/admin/Login'
 import VuexTest from '@/view/VuexTest'
@@ -56,6 +57,16 @@ const router = new Router({
           path: '/classify',
           name: 'Classify',
           component: Classify
+        },
+        {
+          path: '/classify/edit',
+          name: 'ClassifyEditUpdate',
+          component: ClassifyEdit
+        },
+        {
+          path: '/classify/edit/:id',
+          name: 'ClassifyEdit',
+          component: ClassifyEdit
         },
         {
           path: '/tag',

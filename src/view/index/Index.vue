@@ -8,11 +8,11 @@
             <div class="item">标签</div>
           </div>
         </div>
-        <div v-for="item in items">
+        <div v-for="item in items.data">
           <article-content>
-            <div class="title" slot="title">{{item.custom_title}}</div>
-            <div class="updated" slot="updated">{{item.article_id}}</div>
-            <div class="article-content" slot="content">{{item.picture}}</div>
+            <div class="title" slot="title">{{item.title}}</div>
+            <div class="updated" slot="updated">{{item.updated}}</div>
+            <div class="article-content" slot="content">{{item.body}}</div>
           </article-content>
         </div>
     </div>
@@ -26,7 +26,7 @@ export default {
   data () {
     return {
       screenHeight: document.documentElement.clientHeight,
-      items: []
+      items: {}
     }
   },
   components: {
@@ -36,11 +36,12 @@ export default {
     let that = this
     axios({
       method: 'get',
-      url: 'https://api.gzxunzhi.cn/v1/guokr/flowingboard/item/handpick_carousel',
+      // url: 'https://api.gzxunzhi.cn/v1/guokr/flowingboard/item/handpick_carousel',
+      url: 'http://127.0.0.1:5000/api/v1/index/article?page=1&per_page=10',
       responseType: 'json'
     })
     .then(function (res) {
-      that.items = res.data.result
+      that.items = res.data
     })
     .catch(function (err) {
       console.log(err)

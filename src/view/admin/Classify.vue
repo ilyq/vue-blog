@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="article">
     <h2>分类</h2>
     <div>
       <mu-table>
@@ -17,13 +17,19 @@
             <mu-td>{{ item.created }}</mu-td>
             <mu-td>{{ item.updated }}</mu-td>
             <mu-td>
-              <router-link :to="{name: 'ArticleEditUpdate', params:{id: item.id}}">
+              <router-link :to="{name: 'ClassifyEditUpdate', params:{id: item.id}}">
                 <mu-raised-button label="编辑" primary></mu-raised-button>
               </router-link>
             </mu-td>
           </mu-tr>
         </mu-tbody>
       </mu-table>
+    </div>
+    <div class="add-button">
+      <router-link to="/classify/edit">
+        <mu-raised-button label="新增" primary>
+        </mu-raised-button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -55,3 +61,9 @@
     }
   }
 </script>
+
+<style>
+  .add-button {
+    margin-top: 20px;
+  }
+</style>

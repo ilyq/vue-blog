@@ -1,11 +1,13 @@
 <template>
   <div class="login">
-    <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">
-      {{errMsg}}
-    </mu-popup>
-    <mu-text-field v-model="username" label="用户名" hintText="请输入用户名" labelFloat/><br/>
-    <mu-text-field v-model="password" label="密码" hintText="请输入密码" type="password" labelFloat/><br/>
-    <mu-raised-button label="登录" class="demo-raised-button" primary @click.native="login_fun"/>
+    <div class="login-view">
+      <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">
+        {{errMsg}}
+      </mu-popup>
+      <mu-text-field v-model="username" label="用户名" hintText="请输入用户名" labelFloat/>
+      <mu-text-field v-model="password" label="密码" hintText="请输入密码" type="password" labelFloat/>
+      <mu-raised-button label="登录" class="demo-raised-button" primary @click.native="login_fun"/>
+    </div>
   </div>
 </template>
 
@@ -66,7 +68,19 @@
 
 <style>
   .login {
-    margin: 20px;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .login-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   .demo-popup-top {
     width: 100%;
