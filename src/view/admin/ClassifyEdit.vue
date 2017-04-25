@@ -25,23 +25,40 @@
     },
     methods: {
       updateCategory: function () {
-        console.log(this.name)
-        console.log(this.oldName)
-        axios({
-          method: 'put',
-          url: 'http://127.0.0.1:5000/api/v1/admin/category?token=' + store.state.access_token,
-          responseType: 'json',
-          data: {
-            new_name: this.name,
-            name: this.oldName
-          }
-        })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+        if (this.oldName) {
+          console.log(this.name)
+          console.log(this.oldName)
+          axios({
+            method: 'put',
+            url: 'http://127.0.0.1:5000/api/v1/admin/category?token=' + store.state.access_token,
+            responseType: 'json',
+            data: {
+              new_name: this.name,
+              name: this.oldName
+            }
+          })
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        } else {
+          axios({
+            method: 'post',
+            url: 'http://127.0.0.1:5000/api/v1/admin/category?token=' + store.state.access_token,
+            responseType: 'json',
+            data: {
+              name: this.name
+            }
+          })
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        }
       }
     },
     created: function () {

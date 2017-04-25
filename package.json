@@ -16,6 +16,7 @@
     "axios": "^0.15.3",
     "github-markdown-css": "^2.4.1",
     "keycode": "^2.1.8",
+    "marked": "^0.3.6",
     "muse-ui": "^2.0.0-rc.5",
     "simplemde-theme-base": "^0.1.2",
     "vue": "^2.2.2",

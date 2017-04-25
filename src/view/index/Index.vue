@@ -12,7 +12,7 @@
           <article-content>
             <div class="title" slot="title">{{item.title}}</div>
             <div class="updated" slot="updated">{{item.updated}}</div>
-            <div class="article-content" slot="content">{{item.body}}</div>
+            <div v-html="marked(item.body)" class="article-content" slot="content"></div>
           </article-content>
         </div>
     </div>
@@ -21,12 +21,19 @@
 <script>
 import axios from 'axios'
 import Article from '@/components/Article'
+var marked = require('marked')
+
 export default {
   name: 'index',
   data () {
     return {
       screenHeight: document.documentElement.clientHeight,
       items: {}
+    }
+  },
+  methods: {
+    marked: function (input) {
+      return marked(input)
     }
   },
   components: {
