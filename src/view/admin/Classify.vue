@@ -1,8 +1,11 @@
 <template>
   <div class="article">
-    <h2>分类</h2>
+    <h2>分类</h2>    
+    <div class="delete-div">
+      <mu-raised-button label="删除" primary @click.native="deleteArticle"></mu-raised-button>
+    </div>
     <div>
-      <mu-table>
+      <mu-table @cellClick="cellClick" :multiSelectable="multiSelectable">
         <mu-thead>
           <mu-tr>
             <mu-th>名称</mu-th>
@@ -11,11 +14,11 @@
             <mu-th>操作</mu-th>
           </mu-tr>
         </mu-thead>
-        <mu-tbody v-for="item in items" :key="item.id">
-          <mu-tr>
-            <mu-td>{{ item.name }}</mu-td>
-            <mu-td>{{ item.created }}</mu-td>
-            <mu-td>{{ item.updated }}</mu-td>
+        <mu-tbody>
+          <mu-tr v-for="item in items" :key="item.id">
+            <mu-td :name="item.name.toString()">{{ item.name }}</mu-td>
+            <mu-td :name="item.name.toString()">{{ item.created }}</mu-td>
+            <mu-td :name="item.name.toString()">{{ item.updated }}</mu-td>
             <mu-td>
               <router-link :to="{name: 'ClassifyEditUpdate', params:{id: item.id}}">
                 <mu-raised-button label="编辑" primary></mu-raised-button>
@@ -35,13 +38,15 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import axios from '@/http/index'
   import store from '@/store/store'
   export default {
     name: 'classify',
     data () {
       return {
-        items: []
+        items: [],
+        selectId: 0,
+        multiSelectable: false
       }
     },
     created: function () {
@@ -58,6 +63,35 @@
       .catch(function (err) {
         console.log(err)
       })
+    },
+    methods: {
+      cellClick (rowIndex, columnName, td, tr) {
+        console.log(columnName)
+        if (this.selectId === columnName) {
+          this.selectId = 0
+        } else {
+          this.selectId = columnName
+        }
+      },
+      deleteArticle () {
+        console.log(this.selectId)
+        if (this.selectId) {
+          axios({
+            method: 'delete',
+            url: 'http://127.0.0.1:5000/api/v1/admin/category?token=' + store.state.access_token,
+            responseType: 'json',
+            data: {
+              name: this.selectId
+            }
+          })
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        }
+      }
     }
   }
 </script>

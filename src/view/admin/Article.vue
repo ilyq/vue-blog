@@ -1,8 +1,11 @@
 <template>
   <div class="article">
     <h2>文章列表</h2>
+    <div class="delete-div">
+      <mu-raised-button label="删除" primary @click.native="deleteArticle"></mu-raised-button>
+    </div>
     <div>
-      <mu-table>
+      <mu-table @cellClick="cellClick" :multiSelectable="multiSelectable">
         <mu-thead>
           <mu-tr>
             <mu-th>标题</mu-th>
@@ -12,12 +15,12 @@
             <mu-th>操作</mu-th>
           </mu-tr>
         </mu-thead>
-        <mu-tbody v-for="item in articleData" :key="item.id">
-          <mu-tr>
-            <mu-td>{{ item.title }}</mu-td>
-            <mu-td>{{ item.category }}</mu-td>
-            <mu-td>{{ item.created }}</mu-td>
-            <mu-td>{{ item.updated }}</mu-td>
+        <mu-tbody>
+          <mu-tr v-for="item in articleData" :key="item.id">
+            <mu-td :name="item.id.toString()">{{ item.title }}</mu-td>
+            <mu-td :name="item.id.toString()">{{ item.category }}</mu-td>
+            <mu-td :name="item.id.toString()">{{ item.created }}</mu-td>
+            <mu-td :name="item.id.toString()">{{ item.updated }}</mu-td>
             <mu-td>
               <router-link :to="{name: 'ArticleEditUpdate', params:{id: item.id}}">
                 <mu-raised-button label="编辑" primary></mu-raised-button>
@@ -37,13 +40,15 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import axios from '@/http/index'
   import store from '@/store/store'
   export default {
     name: 'article',
     data () {
       return {
-        articleData: []
+        articleData: [],
+        selectId: 0,
+        multiSelectable: false
       }
     },
     created: function () {
@@ -54,12 +59,40 @@
         responseType: 'json'
       })
       .then(function (res) {
-        console.log(res)
         that.articleData = res.data.data
       })
       .catch(function (err) {
         console.log(err)
       })
+    },
+    methods: {
+      cellClick (rowIndex, columnName, td, tr) {
+        console.log(columnName)
+        if (this.selectId === columnName) {
+          this.selectId = 0
+        } else {
+          this.selectId = columnName
+        }
+      },
+      deleteArticle () {
+        console.log(this.selectId)
+        if (this.selectId) {
+          axios({
+            method: 'delete',
+            url: 'http://127.0.0.1:5000/api/v1/admin/article?token=' + store.state.access_token,
+            responseType: 'json',
+            data: {
+              id: this.selectId
+            }
+          })
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        }
+      }
     }
   }
 </script>
@@ -70,5 +103,8 @@
   }
   .button {
     margin-top: 20px;
+  }
+  .delete-div {
+    text-align: right;
   }
 </style>

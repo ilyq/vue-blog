@@ -89,7 +89,6 @@ const router = new Router({
 })
 
 if (window.localStorage.getItem('access_token')) {
-  console.log('access token ............')
   store.commit(types.LOGIN, window.localStorage.getItem('access_token'))
 }
 
