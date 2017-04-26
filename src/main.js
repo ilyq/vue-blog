@@ -6,7 +6,7 @@ import router from './router'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import store from './store/store'
-import axios from './http/http'
+import axios from './http/index'
 
 Vue.use(MuseUI)
 
