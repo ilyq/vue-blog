@@ -2,9 +2,9 @@
   <div>
     <mu-appbar title="Muse UI"/>
     <mu-list>
-      <router-link :to="{name: 'AdminIndex'}">
+<!--       <router-link :to="{name: 'AdminIndex'}">
         <mu-list-item title="主页"/>
-      </router-link>
+      </router-link> -->
       <router-link :to="{name: 'Article'}">
         <mu-list-item title="文章"/>
       </router-link>

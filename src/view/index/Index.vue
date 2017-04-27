@@ -1,19 +1,14 @@
 <template>
-    <div class="index" v-bind:style="{height: screenHeight}">
-        <div class="header">
-          <span class="brand">ilyq</span>
-          <div class="menu">
-            <div class="item">首页</div>
-            <div class="item">归档</div>
-            <div class="item">标签</div>
+    <div class="index">
+        <head-item></head-item>
+        <div class="article-div">
+          <div v-for="item in items.data">
+            <article-content>
+              <div class="title" slot="title">{{item.title}}</div>
+              <div class="updated" slot="updated">{{item.updated}}</div>
+              <div v-html="marked(item.body)" class="article-content" slot="content"></div>
+            </article-content>
           </div>
-        </div>
-        <div v-for="item in items.data">
-          <article-content>
-            <div class="title" slot="title">{{item.title}}</div>
-            <div class="updated" slot="updated">{{item.updated}}</div>
-            <div v-html="marked(item.body)" class="article-content" slot="content"></div>
-          </article-content>
         </div>
     </div>
 </template>
@@ -21,6 +16,7 @@
 <script>
 import axios from 'axios'
 import Article from '@/components/Article'
+import Head from '@/view/index/Head'
 var marked = require('marked')
 
 export default {
@@ -37,7 +33,8 @@ export default {
     }
   },
   components: {
-    'article-content': Article
+    'article-content': Article,
+    'head-item': Head
   },
   created: function () {
     let that = this
@@ -59,46 +56,35 @@ export default {
 
 <style>
 .index {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  max-width: 1170px;
+  min-height: 100vh;
+  background-color: #fff;
+  margin: 0 auto;
 }
-.header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.brand {
-  color: #fff;
-  background: #222;
-  padding: 0 40px;
-  font-size: 24px;
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-  display: inline-block;
-  line-height: 36px;
-  margin-top: 15px;
-}
-.menu {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 15px;
-}
-.item {
-  margin: 10px;
+.article-div {
+  box-sizing: border-box;
+  max-width: 770px;
+  width: 100%;
+  padding: 80px 10px 10px;
+  margin: 0 auto;
 }
 .title {
-  font-size: 26px;
-  font-weight: 400;
-  color: #555;
+  text-align: center;
+  font-size: 2.4rem;
+  color: #212121;
   line-height: 1.2;
+  border-bottom: 2px solid #fff;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
+
+.title:hover {
+  border-bottom: 2px solid #F9AFAF;
+}
+
 .updated {
   font-size: 12px;
   color: #999;
+  margin: 5px;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .article-content {

@@ -14,11 +14,11 @@
 
 <style>
   .article {
-    background: white;
+/*    background: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 20px;*/
   }
 </style>

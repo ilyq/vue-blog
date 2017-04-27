@@ -22,8 +22,10 @@
 <script>
   import Content from '@/view/admin/Content.vue'
   import Drawer from '@/view/admin/Drawer.vue'
+  import axios from 'axios'
   import * as types from '@/store/types'
   import {mapState} from 'vuex'
+  import store from '@/store/store'
 
   export default {
     name: 'Admin',
@@ -45,6 +47,11 @@
       if (this.screenWidth < 993) {
         this.changeState()
       }
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:5000/api/v1/admin/verify/token?token=' + store.state.access_token,
+        responseType: 'json'
+      })
     },
     computed: mapState({
       access_token: state => state.access_token

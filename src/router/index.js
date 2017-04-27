@@ -3,6 +3,8 @@ import Router from 'vue-router'
 // import Hello from '@/components/Hello'
 // index
 import Index from '@/view/index/Index'
+import Category from '@/view/index/Category'
+import About from '@/view/index/About'
 // admin
 import Admin from '@/view/admin/Admin'
 import AdminIndex from '@/view/admin/AdminIndex'
@@ -13,8 +15,6 @@ import ClassifyEdit from '@/view/admin/ClassifyEdit'
 import Tag from '@/view/admin/Tag'
 import Login from '@/view/admin/Login'
 import VuexTest from '@/view/VuexTest'
-import store from '@/store/store'
-import * as types from '@/store/types'
 
 Vue.use(Router)
 
@@ -24,6 +24,16 @@ const router = new Router({
       path: '/',
       name: 'Index',
       component: Index
+    },
+    {
+      path: '/category',
+      name: 'Category',
+      component: Category
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
     },
     {
       path: '/admin',
@@ -86,25 +96,6 @@ const router = new Router({
       component: Login
     }
   ]
-})
-
-if (window.localStorage.getItem('access_token')) {
-  store.commit(types.LOGIN, window.localStorage.getItem('access_token'))
-}
-
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requireAuth)) {
-    if (store.state.access_token) {
-      next()
-    } else {
-      next({
-        name: 'Login',
-        query: {redirect: to.fullPath}
-      })
-    }
-  } else {
-    next()
-  }
 })
 
 export default router
