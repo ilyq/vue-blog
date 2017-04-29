@@ -17,7 +17,14 @@
 import axios from 'axios'
 import Article from '@/components/Article'
 import Head from '@/view/index/Head'
+import 'highlight.js/styles/atom-one-dark.css'
 var marked = require('marked')
+
+marked.setOptions({
+  highlight: function (code) {
+    return require('highlight.js').highlightAuto(code).value
+  }
+})
 
 export default {
   name: 'index',
@@ -40,7 +47,6 @@ export default {
     let that = this
     axios({
       method: 'get',
-      // url: 'https://api.gzxunzhi.cn/v1/guokr/flowingboard/item/handpick_carousel',
       url: 'http://127.0.0.1:5000/api/v1/index/article?page=1&per_page=10',
       responseType: 'json'
     })
@@ -55,6 +61,12 @@ export default {
 </script>
 
 <style>
+pre {
+  /*background-color: #f7f7f7;*/
+  color: #abb2bf;
+  background: #282c34;
+}
+
 .index {
   max-width: 1170px;
   min-height: 100vh;
@@ -65,7 +77,7 @@ export default {
   box-sizing: border-box;
   max-width: 770px;
   width: 100%;
-  padding: 80px 10px 10px;
+  padding: 20px 10px 10px;
   margin: 0 auto;
 }
 .title {
