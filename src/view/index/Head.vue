@@ -25,8 +25,8 @@
 .brand {
   color: #fff;
   background: #222;
-  padding: 0 40px;
-  font-size: 24px;
+  padding: 8px 40px;
+  font-size: 32px;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
   display: inline-block;
   line-height: 36px;

@@ -1,14 +1,15 @@
 <template>
     <div class="index">
         <head-item></head-item>
-        <div class="article-div">
-          <div v-for="item in items.data">
-            <article-content>
-              <div class="title" slot="title">{{item.title}}</div>
-              <div class="updated" slot="updated">{{item.updated}}</div>
-              <div v-html="marked(item.body)" class="article-content" slot="content"></div>
-            </article-content>
-          </div>
+        <div class="article-div" v-for="item in items.data">
+          <article-content>
+            <div class="title" slot="title"><div class="text">{{item.title}}</div></div>
+            <div class="updated" slot="updated">{{item.updated}}</div>
+            <div v-html="marked(item.body)" class="article-content" slot="content"></div>
+          </article-content>
+          <router-link class="read-article" :to="{name: 'Article'}">
+            <div class="text">阅读全文 »</div>
+          </router-link>
         </div>
     </div>
 </template>
@@ -65,6 +66,7 @@ pre {
   /*background-color: #f7f7f7;*/
   color: #abb2bf;
   background: #282c34;
+  padding: 5px;
 }
 
 .index {
@@ -77,11 +79,15 @@ pre {
   box-sizing: border-box;
   max-width: 770px;
   width: 100%;
-  padding: 20px 10px 10px;
+  padding: 40px 10px 10px;
   margin: 0 auto;
 }
 .title {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.title .text {
   font-size: 2.4rem;
   color: #212121;
   line-height: 1.2;
@@ -89,8 +95,8 @@ pre {
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
-.title:hover {
-  border-bottom: 2px solid #F9AFAF;
+.title .text:hover {
+  border-bottom: 2px solid #000;
 }
 
 .updated {
@@ -104,5 +110,21 @@ pre {
   color: #555;
   line-height: 2;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.read-article {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+.read-article .text {
+  border: 2px solid #000;
+  color: #FFF;
+  background-color: #000;
+  padding: 5px 8px;
+}
+.read-article .text:hover {
+  color: #000;
+  background-color: #FFF;
+  border: 2px solid #000;
 }
 </style>

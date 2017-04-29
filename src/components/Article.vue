@@ -1,5 +1,5 @@
 <template>
-  <div class="article">
+  <div>
     <slot name="title"></slot>
     <slot name="updated"></slot>
     <slot name="content"></slot>
@@ -11,14 +11,3 @@
     name: 'article'
   }
 </script>
-
-<style>
-  .article {
-/*    background: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;*/
-  }
-</style>
