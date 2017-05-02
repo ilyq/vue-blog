@@ -16,6 +16,7 @@ import ClassifyEdit from '@/view/admin/ClassifyEdit'
 import Tag from '@/view/admin/Tag'
 import Login from '@/view/admin/Login'
 import VuexTest from '@/view/VuexTest'
+import store from '@/store/store'
 
 Vue.use(Router)
 
@@ -103,6 +104,24 @@ const router = new Router({
       component: Login
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  // 全局验证token是否存在
+  if (to.matched.some(record => record.meta.requireAuth)) {
+    if (store.state.access_token) {
+      next()
+    } else {
+      next({
+        name: 'Login',
+        query: {
+          redirect: to.fullPath
+        }
+      })
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
