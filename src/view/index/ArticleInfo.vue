@@ -1,20 +1,16 @@
 <template>
-    <div class="index">
+    <div class="articleinfo">
         <head-item></head-item>
-        <div class="article-div" v-for="item in items.data">
-            <div class="title"><div class="text">{{item.title}}</div></div>
-            <div class="updated">{{item.updated}}</div>
-            <div v-html="marked(item.body)" class="article-content"></div>
-            <router-link class="read-article" :to="{name: 'ArticleInfo', params:{id: item.id}}">
-              <div class="text">阅读全文 »</div>
-            </router-link>
+        <div class="article-div">
+          <div class="title"><div class="text">{{article.title}}</div></div>
+          <div class="updated">{{article.updated}}</div>
+          <div v-html="marked(article.body)" class="article-content"></div>
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
-import Article from '@/components/Article'
 import Head from '@/view/index/Head'
 import 'highlight.js/styles/atom-one-dark.css'
 var marked = require('marked')
@@ -26,11 +22,10 @@ marked.setOptions({
 })
 
 export default {
-  name: 'index',
+  name: 'articleinfo',
   data () {
     return {
-      screenHeight: document.documentElement.clientHeight,
-      items: {}
+      article: {}
     }
   },
   methods: {
@@ -39,18 +34,19 @@ export default {
     }
   },
   components: {
-    'article-content': Article,
     'head-item': Head
   },
   created: function () {
+    let id = this.$route.params.id
     let that = this
     axios({
       method: 'get',
-      url: 'http://127.0.0.1:5000/api/v1/index/article?page=1&per_page=10',
+      url: 'http://127.0.0.1:5000/api/v1/index/article/info?article_id=' + id,
       responseType: 'json'
     })
     .then(function (res) {
-      that.items = res.data
+      console.log(res)
+      that.article = res.data
     })
     .catch(function (err) {
       console.log(err)
@@ -67,7 +63,7 @@ pre {
   padding: 5px;
 }
 
-.index {
+.articleinfo {
   max-width: 1170px;
   min-height: 100vh;
   background-color: #fff;

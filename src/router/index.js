@@ -3,6 +3,7 @@ import Router from 'vue-router'
 // import Hello from '@/components/Hello'
 // index
 import Index from '@/view/index/Index'
+import ArticleInfo from '@/view/index/ArticleInfo'
 import Category from '@/view/index/Category'
 import About from '@/view/index/About'
 // admin
@@ -25,6 +26,11 @@ const router = new Router({
       path: '/',
       name: 'Index',
       component: Index
+    },
+    {
+      path: '/article/:id',
+      name: 'ArticleInfo',
+      component: ArticleInfo
     },
     {
       path: '/category',
