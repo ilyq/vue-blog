@@ -49,7 +49,7 @@
       }
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:5000/api/v1/admin/verify/token?token=' + store.state.access_token,
+        url: 'http://epoll.top/api/v1/admin/verify/token?token=' + store.state.access_token,
         responseType: 'json'
       })
     },

@@ -30,7 +30,7 @@ export default {
     let that = this
     axios({
       method: 'get',
-      url: 'http://127.0.0.1:5000/api/v1/index/category?page=1&per_page=10',
+      url: 'http://epoll.top/api/v1/index/category?page=1&per_page=10',
       responseType: 'json'
     })
     .then(function (res) {

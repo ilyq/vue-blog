@@ -41,7 +41,7 @@ export default {
     let that = this
     axios({
       method: 'get',
-      url: 'http://127.0.0.1:5000/api/v1/index/article/info?article_id=' + id,
+      url: 'http://epoll.top/api/v1/index/article/info?article_id=' + id,
       responseType: 'json'
     })
     .then(function (res) {

@@ -30,7 +30,7 @@
           console.log(this.oldName)
           axios({
             method: 'put',
-            url: 'http://127.0.0.1:5000/api/v1/admin/category?token=' + store.state.access_token,
+            url: 'http://epoll.top/api/v1/admin/category?token=' + store.state.access_token,
             responseType: 'json',
             data: {
               new_name: this.name,
@@ -46,7 +46,7 @@
         } else {
           axios({
             method: 'post',
-            url: 'http://127.0.0.1:5000/api/v1/admin/category?token=' + store.state.access_token,
+            url: 'http://epoll.top/api/v1/admin/category?token=' + store.state.access_token,
             responseType: 'json',
             data: {
               name: this.name
@@ -67,7 +67,7 @@
       console.log(id)
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:5000/api/v1/index/category/detailed?category_id=' + id,
+        url: 'http://epoll.top/api/v1/index/category/detailed?category_id=' + id,
         responseType: 'json'
       })
       .then(res => {

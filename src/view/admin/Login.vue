@@ -39,7 +39,7 @@
       },
       login_fun: function () {
         if (this.username || this.password) {
-          axios.post('http://127.0.0.1:5000/api/v1/user/login', {
+          axios.post('http://epoll.top/api/v1/user/login', {
             username: this.username,
             password: this.password
           })

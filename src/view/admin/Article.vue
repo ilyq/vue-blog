@@ -55,7 +55,7 @@
       let that = this
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:5000/api/v1/admin/article?token=' + store.state.access_token,
+        url: 'http://epoll.top/api/v1/admin/article?token=' + store.state.access_token,
         responseType: 'json'
       })
       .then(function (res) {
@@ -79,7 +79,7 @@
         if (this.selectId) {
           axios({
             method: 'delete',
-            url: 'http://127.0.0.1:5000/api/v1/admin/article?token=' + store.state.access_token,
+            url: 'http://epoll.top/api/v1/admin/article?token=' + store.state.access_token,
             responseType: 'json',
             data: {
               id: this.selectId
