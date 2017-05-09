@@ -31,6 +31,7 @@
     name: 'article',
     data () {
       return {
+        articleid: '',
         title: '',
         content: '',
         category: [],
@@ -55,44 +56,77 @@
     },
     methods: {
       saveArticle: function () {
-        console.log(this.title)
-        console.log(this.content)
-        console.log(this.categoryname)
-        axios({
-          method: 'post',
-          url: HOSTNAME + 'v1/admin/article?token=' + store.state.access_token,
-          responseType: 'json',
-          data: {
-            title: this.title,
-            body: this.content,
-            category: this.categoryname
-          }
-        })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+        if (this.articleid) {
+          // 更新
+          axios({
+            method: 'put',
+            url: HOSTNAME + 'v1/admin/article?token=' + store.state.access_token,
+            responseType: 'json',
+            data: {
+              id: this.articleid,
+              title: this.title,
+              body: this.content,
+              category: this.categoryname
+            }
+          })
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        } else {
+          // 创建
+          axios({
+            method: 'post',
+            url: HOSTNAME + 'v1/admin/article?token=' + store.state.access_token,
+            responseType: 'json',
+            data: {
+              title: this.title,
+              body: this.content,
+              category: this.categoryname
+            }
+          })
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        }
       }
     },
     created: function () {
       let that = this
       let id = this.$route.params.id
-      console.log(id)
+      that.articleid = id
       axios({
         method: 'get',
         url: HOSTNAME + 'v1/admin/category?token=' + store.state.access_token,
         responseType: 'json'
       })
       .then(res => {
-        console.log(res)
         that.category = res.data
-        console.log(that.category)
       })
       .catch(err => {
         console.log(err)
       })
+      if (id) {
+        axios({
+          method: 'get',
+          url: HOSTNAME + 'v1/index/article/info?article_id=' + id,
+          responseType: 'json'
+        })
+        .then(res => {
+          console.log(res)
+          that.title = res.data.title
+          that.content = res.data.body
+          that.categoryname = res.data.category
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
     }
   }
 </script>
