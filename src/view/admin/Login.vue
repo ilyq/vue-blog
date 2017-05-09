@@ -14,6 +14,7 @@
 <script>
   import * as types from '@/store/types'
   import axios from 'axios'
+  import {HOSTNAME} from '@/http/host'
   export default {
     name: 'login',
     data () {
@@ -39,7 +40,7 @@
       },
       login_fun: function () {
         if (this.username || this.password) {
-          axios.post('http://epoll.top/api/v1/user/login', {
+          axios.post(HOSTNAME + 'v1/user/login', {
             username: this.username,
             password: this.password
           })

@@ -15,6 +15,7 @@
   import 'simplemde-theme-base/dist/simplemde-theme-base.min.css'
   import store from '@/store/store'
   import axios from 'axios'
+  import {HOSTNAME} from '@/http/host'
   export default {
     name: 'classify',
     data () {
@@ -30,7 +31,7 @@
           console.log(this.oldName)
           axios({
             method: 'put',
-            url: 'http://epoll.top/api/v1/admin/category?token=' + store.state.access_token,
+            url: HOSTNAME + 'v1/admin/category?token=' + store.state.access_token,
             responseType: 'json',
             data: {
               new_name: this.name,
@@ -46,7 +47,7 @@
         } else {
           axios({
             method: 'post',
-            url: 'http://epoll.top/api/v1/admin/category?token=' + store.state.access_token,
+            url: HOSTNAME + 'v1/admin/category?token=' + store.state.access_token,
             responseType: 'json',
             data: {
               name: this.name
@@ -67,7 +68,7 @@
       console.log(id)
       axios({
         method: 'get',
-        url: 'http://epoll.top/api/v1/index/category/detailed?category_id=' + id,
+        url: HOSTNAME + 'v1/index/category/detailed?category_id=' + id,
         responseType: 'json'
       })
       .then(res => {

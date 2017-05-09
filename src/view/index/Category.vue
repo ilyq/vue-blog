@@ -13,6 +13,7 @@
 <script>
 import axios from 'axios'
 import Head from '@/view/index/Head'
+import {HOSTNAME} from '@/http/host'
 
 export default {
   name: 'category',
@@ -30,11 +31,11 @@ export default {
     let that = this
     axios({
       method: 'get',
-      url: 'http://epoll.top/api/v1/index/category?page=1&per_page=10',
+      url: HOSTNAME + 'v1/index/category?page=1&per_page=10',
       responseType: 'json'
     })
     .then(function (res) {
-      console.log(res)
+      // console.log(res)
       that.items = res.data
       that.total = res.data.total
     })

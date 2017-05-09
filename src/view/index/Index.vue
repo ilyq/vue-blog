@@ -17,6 +17,7 @@ import axios from 'axios'
 import Article from '@/components/Article'
 import Head from '@/view/index/Head'
 import 'highlight.js/styles/atom-one-dark.css'
+import {HOSTNAME} from '@/http/host'
 var marked = require('marked')
 
 marked.setOptions({
@@ -46,7 +47,7 @@ export default {
     let that = this
     axios({
       method: 'get',
-      url: 'http://epoll.top/api/v1/index/article?page=1&per_page=10',
+      url: HOSTNAME + 'v1/index/article?page=1&per_page=10',
       responseType: 'json'
     })
     .then(function (res) {

@@ -31,7 +31,7 @@
       </mu-table>
     </div>
     <div class="button">
-      <router-link to="/article/edit">
+      <router-link :to="{name: 'ArticleEdit'}">
         <mu-raised-button label="新增" primary>
         </mu-raised-button>
       </router-link>
@@ -42,6 +42,7 @@
 <script>
   import axios from '@/http/index'
   import store from '@/store/store'
+  import {HOSTNAME} from '@/http/host'
   export default {
     name: 'article',
     data () {
@@ -55,7 +56,7 @@
       let that = this
       axios({
         method: 'get',
-        url: 'http://epoll.top/api/v1/admin/article?token=' + store.state.access_token,
+        url: HOSTNAME + 'v1/admin/article?token=' + store.state.access_token,
         responseType: 'json'
       })
       .then(function (res) {
@@ -79,7 +80,7 @@
         if (this.selectId) {
           axios({
             method: 'delete',
-            url: 'http://epoll.top/api/v1/admin/article?token=' + store.state.access_token,
+            url: HOSTNAME + 'v1/admin/article?token=' + store.state.access_token,
             responseType: 'json',
             data: {
               id: this.selectId

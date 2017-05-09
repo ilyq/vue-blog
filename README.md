@@ -1,5 +1,25 @@
 # vue-admin
 
+**注：目录bug比较**
+
+**使用方法**
+ - 配合[https://github.com/ilyq/flask-vue-blog](https://github.com/ilyq/flask-vue-blog)后端使用
+
+**nginx配置**
+ - 参考[https://router.vuejs.org/zh-cn/essentials/history-mode.html](https://router.vuejs.org/zh-cn/essentials/history-mode.html)
+```
+location / {
+  try_files $uri $uri/ /index.html;
+}
+```
+
+**效果**：
+主页
+![](https://github.com/ilyq/vue-blog/blob/master/images/1.png)
+admin
+![](https://github.com/ilyq/vue-blog/blob/master/images/2.png)
+
+
 > A Vue.js project
 
 ## Build Setup

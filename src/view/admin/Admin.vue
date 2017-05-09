@@ -26,6 +26,7 @@
   import * as types from '@/store/types'
   import {mapState} from 'vuex'
   import store from '@/store/store'
+  import {HOSTNAME} from '@/http/host'
 
   export default {
     name: 'Admin',
@@ -49,7 +50,7 @@
       }
       axios({
         method: 'get',
-        url: 'http://epoll.top/api/v1/admin/verify/token?token=' + store.state.access_token,
+        url: HOSTNAME + 'v1/admin/verify/token?token=' + store.state.access_token,
         responseType: 'json'
       })
     },

@@ -26,6 +26,7 @@
   import store from '@/store/store'
   import { markdownEditor } from 'vue-simplemde'
   import axios from 'axios'
+  import {HOSTNAME} from '@/http/host'
   export default {
     name: 'article',
     data () {
@@ -59,7 +60,7 @@
         console.log(this.categoryname)
         axios({
           method: 'post',
-          url: 'http://epoll.top/api/v1/admin/article?token=' + store.state.access_token,
+          url: HOSTNAME + 'v1/admin/article?token=' + store.state.access_token,
           responseType: 'json',
           data: {
             title: this.title,
@@ -81,7 +82,7 @@
       console.log(id)
       axios({
         method: 'get',
-        url: 'http://epoll.top/api/v1/admin/category?token=' + store.state.access_token,
+        url: HOSTNAME + 'v1/admin/category?token=' + store.state.access_token,
         responseType: 'json'
       })
       .then(res => {
